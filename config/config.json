@@ -1,0 +1,25 @@
+{
+    "databaseConfig": {
+        "host": "",
+        "database": ""
+    },
+    "bcrypt": {
+        "difficulty": 8
+    },
+    "middleware": {
+        "router": {
+            "enabled": true,
+            "module": {
+                "arguments": [{ "directory": "path:./controllers" }]
+            }
+        },
+        "isAuthenticated": {
+            "enabled": true,
+            "priority": 100,
+            "module": {
+                "name": "path:./lib/auth",
+                "method": "isAuthenticated"
+            }
+        }
+    }
+}
