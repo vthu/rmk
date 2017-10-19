@@ -1,0 +1,1 @@
+export const USER_AVAILABLE = 'USER_AVAILABLE';

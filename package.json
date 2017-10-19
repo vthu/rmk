@@ -1,21 +1,44 @@
 {
   "name": "todo",
   "version": "1.0.0",
-  "description": "",
+  "description": "Tmrrw",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "gulp dev"
+    "dev": "gulp dev",
+    "build": "gulp build",
+    "webpack": "webpack"
   },
-  "author": "",
+  "author": "Vishal Thukral",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^1.0.3",
     "express": "^4.8.4",
+    "jsonwebtoken": "^8.1.0",
     "kraken-js": "^2.1.0",
     "mongoose": "^4.12.3",
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.0",
-    "passport-local": "^1.0.0"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "axios": "^0.16.2",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-nodemon": "^2.2.1",
+    "webpack": "^3.8.1"
   }
 }

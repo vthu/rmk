@@ -6,7 +6,16 @@
     "bcrypt": {
         "difficulty": 8
     },
+    "jwtOptions": {
+        "secret": "mySecretIsHope",
+        "extractFrom": "fromAuthHeaderAsBearerToken"
+    },
     "middleware": {
+        "static": {
+            "module": {
+                "arguments": [ "path:./.build" ]
+            }
+        },
         "router": {
             "enabled": true,
             "module": {
@@ -14,11 +23,25 @@
             }
         },
         "isAuthenticated": {
-            "enabled": true,
-            "priority": 100,
+            "enabled": false,
             "module": {
                 "name": "path:./lib/auth",
                 "method": "isAuthenticated"
+            }
+        },
+        "appsec": {
+            "enabled": true,
+            "priority": 110,
+            "module": {
+                "name": "lusca",
+                "arguments": [
+                    {
+                        "csrf": false,
+                        "xframe": "SAMEORIGIN",
+                        "p3p": false,
+                        "csp": false
+                    }
+                ]
             }
         }
     }

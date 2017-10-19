@@ -7,13 +7,11 @@ const crypto = require('../lib/crypto');
 
 const userModel = function() {
     const userSchema = mongoose.Schema({
-        name: String,
-        login: {
+        email: {
             type: String,
             unique: true
         },
-        password: String,
-        role: String
+        password: String
     });
 
     userSchema.pre('save', function (next) {
