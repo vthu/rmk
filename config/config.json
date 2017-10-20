@@ -22,13 +22,6 @@
                 "arguments": [{ "directory": "path:./controllers" }]
             }
         },
-        "isAuthenticated": {
-            "enabled": false,
-            "module": {
-                "name": "path:./lib/auth",
-                "method": "isAuthenticated"
-            }
-        },
         "appsec": {
             "enabled": true,
             "priority": 110,

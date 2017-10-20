@@ -2,7 +2,8 @@ import { USER_AVAILABLE } from '../actions/types';
 
 const INITIAL_STATE = {
     email: null,
-    token: null
+    token: null,
+    isInit: false
 };
 
 const user = (state = INITIAL_STATE, action) => {

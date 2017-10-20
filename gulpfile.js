@@ -33,7 +33,7 @@ gulp.task('watch', function() {
 gulp.task('dev', ['build', 'watch'], function() {
     $.nodemon({
         script: 'index.js',
-        watch: ['controllers', 'models', 'config'],
+        watch: ['controllers', 'models', 'config', 'lib'],
         exec: 'node --inspect',
     });
 });

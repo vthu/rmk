@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Input, Button, Image } from '../../common';
-import { login, signup } from '../../../actions';
+import { Input, Button, Image, Loader } from '../../common';
+import { login, signup, validateToken } from '../../../actions';
 
 let email, password;
 
 class _Home extends React.PureComponent {
    constructor(props) {
        super(props);
+       this.props.validateToken();
    }
 
     emailRef =  input => {
@@ -33,6 +34,17 @@ class _Home extends React.PureComponent {
     };
 
     render() {
+        if (!this.props.user.isInit) {
+            return (
+                <div className="home loader">
+                    <Loader size="XS" />
+                </div>
+            )
+        }
+        if (this.props.user.isInit && this.props.user.email && this.props.user.token) {
+            setTimeout(() => this.props.history.push('/dashboard'), 10);
+            return null;
+        }
         return (
             <div className="home">
                 <div>
@@ -68,9 +80,14 @@ class _Home extends React.PureComponent {
 
 const mapDispacthToProps = ({
     login,
-    signup  
-})
+    signup,
+    validateToken
+});
 
-const Home = connect(null, mapDispacthToProps)(_Home);
+const mapStateToProps = ({ user }) => ({
+    user
+});
+
+const Home = connect(mapStateToProps, mapDispacthToProps)(_Home);
 
 export { Home };
