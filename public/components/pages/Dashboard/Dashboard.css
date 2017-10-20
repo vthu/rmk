@@ -19,3 +19,8 @@
     flex-direction: column;
     align-items: center
 }
+
+.dashboard .loader {
+    display: flex;
+    align-items: center;
+}

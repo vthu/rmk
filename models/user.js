@@ -9,9 +9,13 @@ const userModel = function() {
     const userSchema = mongoose.Schema({
         email: {
             type: String,
-            unique: true
+            unique: true,
+            required: true
         },
-        password: String
+        password: {
+            type: String,
+            required: true
+        }
     });
 
     userSchema.pre('save', function (next) {

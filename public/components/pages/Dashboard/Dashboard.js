@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Header, Loader, Input, Selector, Button } from '../../common';
-import { login, signup, validateToken } from '../../../actions';
+import { login, signup, validateToken, createOrg } from '../../../actions';
 
 
 let orgName;
@@ -32,6 +32,7 @@ class _Dashboard extends React.PureComponent {
     currentOrgRef = input => currentOrg = input;
     currentProductRef = input => currentProduct = input;
 
+    createOrg = () => this.props.createOrg(orgName.value);
     render () {
         if (!this.props.user.isInit) {
             return (
@@ -53,11 +54,11 @@ class _Dashboard extends React.PureComponent {
                     <div className="company">
                         <h3>Add Company</h3>
                         <Input  placeholder="Name" icon="assets/img/tag.png" refe={this.orgNameRef}  />
-                        <Button title="Add" />
+                        <Button title="Add" onClick={this.createOrg} />
                     </div>
                     <div className="product">
                         <h3>Add Product to</h3>
-                        <Selector refe={this.currentOrgRef} data={[{ key: 'Apple', value: 'apple' }, { key: 'Microsoft', value: 'mango' }, { key: 'Google', value: 'banana' }]} />
+                        <Selector refe={this.currentOrgRef} data={this.props.orgs} />
                         <Input  placeholder="Product Name" icon="assets/img/product.png" refe={this.producttNameRef}  />
                         <Input  placeholder="Price in ETH" icon="assets/img/money.png" refe={this.productPriceRef}  />
                         <Button title="Add" />
@@ -69,6 +70,13 @@ class _Dashboard extends React.PureComponent {
                         <Input  placeholder="Image Link" icon="assets/img/camera.png" refe={this.storyImageLinkRef}  />
                         <Button title="Add" />
                     </div>
+                </div>
+                <div className="loader">
+                    {
+                        this.props.network.isLoading ?
+                        <Loader />
+                        : null
+                    }
                 </div>
                 <div>
                     <hr />
@@ -89,9 +97,10 @@ class _Dashboard extends React.PureComponent {
         )
     }
 }
-const mapStateToProps = ({ user }) => ({ user });
+const mapStateToProps = ({ user, orgs, network }) => ({ user, orgs, network });
 const mapDispatchToProps = {
-    validateToken
+    validateToken,
+    createOrg
 };
 
 const Dashboard = connect(mapStateToProps, mapDispatchToProps)(_Dashboard);
