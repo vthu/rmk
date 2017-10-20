@@ -2,11 +2,12 @@ const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
 
 module.exports = router => {
-    router.get('/', (req, res) => {
+    router.post('/login', (req, res) => {
         const { email, password } = req.body;
         //Regex for email & password
         if (!password || !email) {
             res.sendStatus(400);
+            return;
         }
         const secret = req.app.kraken.get('jwtOptions:secret');
         User.findOne({ email }, (err, user) => {
@@ -21,13 +22,15 @@ module.exports = router => {
             }
 
             const token = jwt.sign({ id: user._id }, secret);
-            delete user.password;
-            res.json({ token, user });
+
+            const { email } = user;
+           
+            res.json({ user: { email, token } });
         });
 
     });
 
-    router.post('/', (req, res) => {
+    router.post('/signup', (req, res) => {
         const { email, password } = req.body;
         //Regex for email & password
         if (!password || !email) {
@@ -42,8 +45,10 @@ module.exports = router => {
                 return;
             }
             const token = jwt.sign({ id: user._id }, secret);
-            delete user.password;
-            res.json({ token, user });
+            
+            const { email } = user;
+
+            res.json({ user: { token, email }});
         });
     });
 }

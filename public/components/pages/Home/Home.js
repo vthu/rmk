@@ -18,15 +18,17 @@ class _Home extends React.PureComponent {
         password = input;
     };
 
-    login = () => {
+    login = async () => {
         if (email.value && password.value) {
-            this.props.login(email.value, password.value);
+            await this.props.login(email.value, password.value);
+            this.props.history.push('/dashboard')
         }
     };
 
-    signup = () => {
+    signup = async () => {
         if (email.value && password.value) {
-            this.props.signup(email.value, password.value);
+            await this.props.signup(email.value, password.value);
+            this.props.history.push('/dashboard')
         }
     };
 
