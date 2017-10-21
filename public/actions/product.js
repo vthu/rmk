@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { REQUEST_STARTED, REQUEST_ENDED, PRODUCT_ADDED, PRODUCTS_AVAILABLE, RESET_STATE } from './types';
+import { REQUEST_STARTED, REQUEST_ENDED, PRODUCT_ADDED, PRODUCTS_AVAILABLE, RESET_STATE, CURRENT_PRODUCT_AVAILABLE } from './types';
 
 const OrganisationCompiled = require('../contracts/Organisation.json');
 const ProductCompiled = require('../contracts/Product.json');
@@ -123,3 +123,10 @@ export const fetchProducts = (orgAddress) => async (dispatch, getState) => {
         });
     }
 }
+
+export const setCurrentProduct = (address) => ({
+    type: CURRENT_PRODUCT_AVAILABLE,
+    payload: {
+        address
+    }
+})

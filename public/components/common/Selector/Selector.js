@@ -6,7 +6,7 @@ const Selector = ({ data=[], refe, onChange, def="Select" }) => {
     return (
         <div className="selectorContainer">
             <select onChange={onChange} ref={refe}>
-                <option value={null}>{def}</option>
+                <option value="">{def}</option>
                 {
                     data.map(({ name, address }) =>  <option key={address} value={address}>{name}</option>)
                 }

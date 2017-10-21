@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Header, Loader, Input, Selector, Button } from '../../common';
-import { login, signup, validateToken, createOrg, fetchOrgs, createProduct, fetchProducts } from '../../../actions';
+import { createOrg, fetchOrgs, createProduct, fetchProducts, addStory, setCurrentProduct } from '../../../actions';
 
+const QRCode = require('qrcode.react');
 
 let orgName;
 let product = {
@@ -33,12 +34,34 @@ class _Dashboard extends React.PureComponent {
     storyImageLinkRef = input => story.imageLink = input;
     currentOrgRef = input => currentOrg = input;
     currentProductRef = input => currentProduct = input;
-    createProduct = () => this.props.createProduct(product.name.value, product.price.value, currentOrg.value);
-    createOrg = () => this.props.createOrg(orgName.value);
+    createProduct = () => {
+        this.props.createProduct(product.name.value, product.price.value, currentOrg.value);
+        product.name.value = null;
+        product.price.value = null;
+    }
+    createOrg = () =>  {
+        this.props.createOrg(orgName.value);
+        orgName.value = null;
+    }
     
     onOrgChange = () => {
         this.props.fetchProducts(currentOrg.value);
     };
+
+    onProductChange = () => {
+        this.props.setCurrentProduct(currentProduct.value);
+    }
+    
+    addStory = () => {
+        this.props.addStory(story.description.value, story.imageLink.value, currentProduct.value, currentOrg.value);
+        story.description.value = null;
+        story.imageLink.value = null;
+    };
+
+
+    getHost = () => {
+        return window.location.origin;
+    }
     
     render () {
 
@@ -65,10 +88,10 @@ class _Dashboard extends React.PureComponent {
                     </div>
                     <div className="story">
                         <h3>Add Story to</h3>
-                        <Selector refe={this.currentProductRef} data={this.props.products} def="Select Product" />
+                        <Selector onChange={this.onProductChange} refe={this.currentProductRef} data={this.props.products} def="Select Product" />
                         <Input  placeholder="Description" icon="assets/img/keyboard.png" refe={this.storyDescriptionRef}  />
                         <Input  placeholder="Image Link" icon="assets/img/camera.png" refe={this.storyImageLinkRef}  />
-                        <Button title="Add" />
+                        <Button title="Add" onClick={this.addStory} />
                     </div>
                 </div>
                 <div className="loader">
@@ -82,26 +105,29 @@ class _Dashboard extends React.PureComponent {
                     <hr />
                 </div>
                 <div className="view">
-                    <div className="companies">
-                        <h3>My Companies</h3>
-                        <p>Address</p>
-                        <h3>My Products</h3>
-                    </div>
-                    <div className="qrcode">
-                        <h3>Shirt</h3>
-                    </div>
+                    {
+                        this.props.currentProduct.address ?
+                        <div className="qrcode">
+                            <h3>QR Code</h3>
+                            <QRCode value={`${window.location.origin}/info/${this.props.currentProduct.address}`} />
+                            <a href={`${window.location.origin}/info/${this.props.currentProduct.address}`}>Link</a>
+                        </div>
+                        :
+                        null
+                    }
                 </div>
             </div>
         )
     }
 }
-const mapStateToProps = ({ user, orgs, network, products }) => ({ user, orgs, network, products });
+const mapStateToProps = ({ user, orgs, network, products, currentProduct }) => ({ user, orgs, network, products, currentProduct });
 const mapDispatchToProps = {
-    validateToken,
     createOrg,
     fetchOrgs,
     createProduct,
-    fetchProducts
+    fetchProducts,
+    addStory,
+    setCurrentProduct
 };
 
 const Dashboard = connect(mapStateToProps, mapDispatchToProps)(_Dashboard);
