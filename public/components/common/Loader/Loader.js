@@ -3,7 +3,7 @@ import { Image } from '../Image/Image';
 
 const Loader = ({ size = 'XXS', message }) => (
     <div className="iloader">
-        <Image src="assets/img/loading.gif" size={size} />
+        <Image src="/assets/img/loading.gif" size={size} />
         {
             message ?
             <p>{message}</p>

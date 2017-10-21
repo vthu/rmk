@@ -3,3 +3,4 @@ export * from './utils';
 export * from './org';
 export * from './product';
 export * from './story';
+export * from './productInfo';

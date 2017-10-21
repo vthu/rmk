@@ -4,3 +4,4 @@ export * from './Image/Image';
 export * from './Header/Header';
 export * from './Loader/Loader';
 export * from './Selector/Selector';
+export * from './Card/Card';
