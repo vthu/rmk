@@ -1,4 +1,10 @@
 .button {
     height: 35px;
-    width: 80px;
+    min-width: 60px;
+    color: white;
+    background-color: #1E77BB;
+    border-width: 0px;
+}
+.buttonContainer {
+    margin: 5px;
 }

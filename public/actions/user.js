@@ -5,7 +5,7 @@ import { storeToken, getToken } from './utils';
 
 export const login = (email, password) => async (dispatch, getState) => {
     try {
-        const res = await axios.post('/api/users/signup', { 
+        const res = await axios.post('/api/users/login', { 
             email,
             password
         });

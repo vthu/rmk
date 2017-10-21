@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { ORGS_AVAILABLE } from './types';
-import { REQUEST_STARTED, REQUEST_ENDED, ORG_ADDED } from './types';
+import { ORGS_AVAILABLE, REQUEST_STARTED, REQUEST_ENDED, ORG_ADDED } from './types';
+import { fetchProducts } from './product';
 
 const OrganisationCompiled = require('../contracts/Organisation.json');
 
@@ -29,46 +29,43 @@ export const createOrg = (orgName) => async (dispatch, getState) => {
         const result = await Organisation.deploy({
             data: OrganisationCompiled.unlinked_binary,
             arguments: [orgName]
-        }).send({ from:  window.defaultAccount })
-        const contractAddress = result.options.address;
-        await axios({
+        }).send({ from:  window.defaultAccount });
+        const payload = {
+            name: orgName,
+            address: result.options.address
+        };
+        const response = await axios({
             method: 'post',
             url: '/api/orgs',
             headers: {
                 Authorization: `Bearer ${user.token}`
             },
-            data: {
-                name: orgName,
-                address: contractAddress
-            }
+            data: payload
         });
         dispatch({
             type: ORG_ADDED,
             payload: {
-                org: {
-                    name: orgName,
-                    address: contractAddress
-                }
+                org: response.data.org
             }
         });
-        dispatch({
-            type: REQUEST_ENDED
-        })
-    
     } catch(err) {
         alert('Something went wrong. Please see console for more info')
         console.log(err);
+    } finally {
+        dispatch({
+            type: REQUEST_ENDED
+        });
     }
 };
 
 export const fetchOrgs = () => async (dispatch, getState) => {
-    const { user: token } = getState();
-    if (token) {
+    const { user } = getState();
+    if (user.token) {
         const res = await axios({
             method: 'get',
-            url: '/api/token',
+            url: '/api/orgs',
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${user.token}`
             }
         });
         const orgs = res.data.orgs;
@@ -77,6 +74,6 @@ export const fetchOrgs = () => async (dispatch, getState) => {
             payload: {
                 orgs
             }
-        })
+        });
     }  
 }

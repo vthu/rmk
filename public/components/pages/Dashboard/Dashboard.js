@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Header, Loader, Input, Selector, Button } from '../../common';
-import { login, signup, validateToken, createOrg } from '../../../actions';
+import { login, signup, validateToken, createOrg, fetchOrgs, createProduct, fetchProducts } from '../../../actions';
 
 
 let orgName;
@@ -21,7 +21,9 @@ let currentProduct;
 class _Dashboard extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.props.validateToken();
+        if (this.props.user.token) {
+            this.props.fetchOrgs();
+        }
     }
 
     orgNameRef = input => orgName = input;
@@ -31,18 +33,16 @@ class _Dashboard extends React.PureComponent {
     storyImageLinkRef = input => story.imageLink = input;
     currentOrgRef = input => currentOrg = input;
     currentProductRef = input => currentProduct = input;
-
+    createProduct = () => this.props.createProduct(product.name.value, product.price.value, currentOrg.value);
     createOrg = () => this.props.createOrg(orgName.value);
+    
+    onOrgChange = () => {
+        this.props.fetchProducts(currentOrg.value);
+    };
+    
     render () {
-        if (!this.props.user.isInit) {
-            return (
-                <div className="home loader">
-                    <Loader size="XS" />
-                </div>
-            )
-        }
 
-        if (this.props.user.isInit &&  !this.props.user.token) {
+        if (!this.props.user.isInit ||  !this.props.user.token) {
             setTimeout(() => this.props.history.push('/'), 10);
             return null;
         }
@@ -58,14 +58,14 @@ class _Dashboard extends React.PureComponent {
                     </div>
                     <div className="product">
                         <h3>Add Product to</h3>
-                        <Selector refe={this.currentOrgRef} data={this.props.orgs} />
+                        <Selector onChange={this.onOrgChange} refe={this.currentOrgRef} data={this.props.orgs} def="Select Company" />
                         <Input  placeholder="Product Name" icon="assets/img/product.png" refe={this.producttNameRef}  />
                         <Input  placeholder="Price in ETH" icon="assets/img/money.png" refe={this.productPriceRef}  />
-                        <Button title="Add" />
+                        <Button title="Add" onClick={this.createProduct} />
                     </div>
                     <div className="story">
                         <h3>Add Story to</h3>
-                        <Selector refe={this.currentProductRef} data={[{ key: 'iPhone', value: 'apple' }, { key: 'Mango', value: 'mango' }, { key: 'Banana', value: 'banana' }]} />
+                        <Selector refe={this.currentProductRef} data={this.props.products} def="Select Product" />
                         <Input  placeholder="Description" icon="assets/img/keyboard.png" refe={this.storyDescriptionRef}  />
                         <Input  placeholder="Image Link" icon="assets/img/camera.png" refe={this.storyImageLinkRef}  />
                         <Button title="Add" />
@@ -74,7 +74,7 @@ class _Dashboard extends React.PureComponent {
                 <div className="loader">
                     {
                         this.props.network.isLoading ?
-                        <Loader />
+                        <Loader message={this.props.network.message} />
                         : null
                     }
                 </div>
@@ -84,10 +84,8 @@ class _Dashboard extends React.PureComponent {
                 <div className="view">
                     <div className="companies">
                         <h3>My Companies</h3>
-                        <Selector />
                         <p>Address</p>
                         <h3>My Products</h3>
-                        <Selector />
                     </div>
                     <div className="qrcode">
                         <h3>Shirt</h3>
@@ -97,10 +95,13 @@ class _Dashboard extends React.PureComponent {
         )
     }
 }
-const mapStateToProps = ({ user, orgs, network }) => ({ user, orgs, network });
+const mapStateToProps = ({ user, orgs, network, products }) => ({ user, orgs, network, products });
 const mapDispatchToProps = {
     validateToken,
-    createOrg
+    createOrg,
+    fetchOrgs,
+    createProduct,
+    fetchProducts
 };
 
 const Dashboard = connect(mapStateToProps, mapDispatchToProps)(_Dashboard);

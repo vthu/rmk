@@ -19,10 +19,6 @@ const prodModel = function() {
         },
         orgAddress: {
             type: String,
-            required: true
-        },
-        _org: {
-            type: String,
             required: true,
             index: true
         },

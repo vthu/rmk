@@ -3,3 +3,6 @@ export const ORGS_AVAILABLE = 'ORGS_AVAILABLE';
 export const REQUEST_STARTED = 'LOADING';
 export const REQUEST_ENDED = 'REQUEST_ENDED';
 export const ORG_ADDED = 'ORG_ADDED';
+export const PRODUCTS_AVAILABLE = 'PRODUCTS_AVAILABLE';
+export const PRODUCT_ADDED = 'PRODUCT_ADDED';
+export const RESET_STATE = 'RESET_STATE';

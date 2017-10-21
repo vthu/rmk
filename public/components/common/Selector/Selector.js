@@ -1,20 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 
-const Selector = ({ data, refe }) => {
-    console.log(data);
+const Selector = ({ data=[], refe, onChange, def="Select" }) => {
     return (
         <div className="selectorContainer">
-            <select ref={refe}>
+            <select onChange={onChange} ref={refe}>
+                <option value={null}>{def}</option>
                 {
-                    data ?
                     data.map(({ name, address }) =>  <option key={address} value={address}>{name}</option>)
-                    : null
                 }
             </select>
         </div>
     )
 
+}
+
+Selector.propTypes = {
+    data: PropTypes.array,
+    refe: PropTypes.func.isRequired,
+    def: PropTypes.string
 }
 
 export { Selector }
