@@ -37,18 +37,31 @@ module.exports = router => {
             res.sendStatus(400);
             return;
         }
-        const user = new User({ email, password });
-        const secret = req.app.kraken.get('jwtOptions:secret');
-        user.save((err, user) => {
-            if (err || !user) {
+        User.findOne({ email }, (err, user) => {
+            if (err) {
                 res.sendStatus(500);
                 return;
             }
-            const token = jwt.sign({ id: user._id }, secret);
-            
-            const { email } = user;
+            const secret = req.app.kraken.get('jwtOptions:secret');
+            if (!user) {
+                const user = new User({ email, password });
+                user.save((err, user) => {
+                    if (err || !user) {
+                        res.sendStatus(500);
+                        return;
+                    }
+                    const token = jwt.sign({ id: user._id }, secret);
+                    
+                    const { email } = user;
+        
+                    res.json({ user: { token, email }});
+                });
 
-            res.json({ user: { token, email }});
+            } else {
+                const token = jwt.sign({ id: user._id }, secret);
+                const { email } = user;
+                res.json({ user: { email, token } });
+            }
         });
     });
 }

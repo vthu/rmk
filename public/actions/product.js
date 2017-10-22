@@ -29,7 +29,7 @@ export const createProduct = (name, price, orgAddress) => async (dispatch, getSt
             }
         })
         const orgDeployed = new web3.eth.Contract(OrganisationCompiled.abi, orgAddress, { from: window.defaultAccount });
-        const result = await orgDeployed.methods.addProduct(name.trim(), Number(price.trim())).send({
+        const result = await orgDeployed.methods.addProduct(name.trim(), price.trim()).send({
             from: window.defaultAccount
         });
         orgDeployed.methods.lastAddedProduct().call(async (err, result) => {

@@ -68,7 +68,7 @@ class _Home extends React.PureComponent {
                     <p>Sign up to start adding stuff to the blockchain</p>
                 </div>
                 <div>
-                    <p>Note: Must use Google Chrome and install Metamask plug-in</p>
+                    <p>Note: Must use Google Chrome and install Metamask plug-in. Currently you can use this on <strong>rinkeby</strong> only)</p>
                 </div>
             </div>
         );
