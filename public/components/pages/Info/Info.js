@@ -29,7 +29,9 @@ class _Info extends React.PureComponent {
                 <h3>Name: {prodInfo.name}</h3>
                 <h3>Price in ETH: {prodInfo.price}</h3>
                 {
-                    prodInfo.data.map(story => <Card src={story.imageURL} description={story.description} date={story.date} />)
+                    prodInfo.stories && prodInfo.stories.length > 0 ?
+                    prodInfo.stories.map(story => <Card src={story.imageURL} description={story.description} date={story.date} />)
+                    : null
                 }
             </div>
         )

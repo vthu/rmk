@@ -7,3 +7,5 @@ const Card = ({ src, description, date }) => (
         <p>{date}</p>
     </div>
 )
+
+export { Card };

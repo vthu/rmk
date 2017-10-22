@@ -1,4 +1,4 @@
-import {  } from '../actions/types';
+import { INFO_AVAILABLE } from '../actions/types';
 
 
 const INITAL_STATE = {
@@ -9,6 +9,11 @@ const INITAL_STATE = {
 };
 const prodInfo = (state=INITAL_STATE, action) => {
     switch (action.type) {
+        case INFO_AVAILABLE:
+         return {
+            isInit: true,
+            ...action.payload.info
+         };
         default:
             return state;
     }
