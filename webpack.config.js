@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-module.exports = {
+const config = {
     entry: ['babel-polyfill', path.resolve(__dirname, 'public/main.js')],
     output: {
         path: path.resolve(__dirname, '.build/js'),
@@ -20,3 +20,22 @@ module.exports = {
         extensions: ['.js', '.jsx']
     }
 }
+
+//Optimize for Production
+config.plugins = config.plugins || [];
+
+//Use Production React
+// config.plugins.push(new webpack.DefinePlugin({
+//   process: {
+//     env: {
+//       NODE_ENV: JSON.stringify("production")
+//     }
+//   }
+// }));
+//Minify The Bundle
+config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+  compress: { warnings: false }
+}));
+
+
+module.exports = config;

@@ -26,7 +26,9 @@ window.addEventListener('load', function () {
         window.web3 = new Web3(web3.currentProvider);
         window.web3.eth.getCoinbase((err, account) => window.defaultAccount = account);
     } else {
-        alert('Install Metamask Chrome Plugin or Open this in Mist')
+        if (window.location.pathname && window.location.pathname.indexOf('info') === -1 ) {
+            alert('Install Metamask Chrome Plugin or Open this in Mist')
+        }
         // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
         //window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
     }

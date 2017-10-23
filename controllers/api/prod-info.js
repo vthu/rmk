@@ -6,13 +6,16 @@ const ProductCompiled = require(path.join(__dirname, '../../public/contracts/Pro
 module.exports = (router) => {
     router.get('/', async (req, res) => {
         const { address } = req.query;
+        console.log('Address is ', address);
         if (!address) return;
         try {
             const deployedProduct = new web3.eth.Contract(ProductCompiled.abi, address);
             const product = await deployedProduct.methods.product().call();
+            console.log(product);
             const name  = product[0];
             const price = product[1];
             const stories = [];
+            console.log(name, price);
             let i = 0;
             while(i > -1) {
                 try {
@@ -20,6 +23,7 @@ module.exports = (router) => {
                     stories.push(story);
                     ++i;
                 } catch(err) {
+                    console.log('Errr ', err);
                     break;
                 }
             }
@@ -32,6 +36,7 @@ module.exports = (router) => {
                 }
            })
         } catch(err) {
+            console.log('Error is ', err);
             res.sendStatus(500);
         }
     })
