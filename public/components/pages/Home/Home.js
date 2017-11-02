@@ -68,7 +68,14 @@ class _Home extends React.PureComponent {
                     <p>Sign up to start adding stuff to the blockchain</p>
                 </div>
                 <div>
-                    <p>Note: Must use Google Chrome and install Metamask plug-in. <strong>(Currently can only be used on rinkeby)</strong></p>
+                    <p>Note: Must install Metamask plug-in for your web browser.<strong>(Currently can only be used on rinkeby)</strong></p>
+                    <hr/>
+                </div>
+                <div className="videoContainer">
+                    <h3>Don't know how to use? Watch this</h3>
+                    <iframe width="480" height="315"
+                        src="https://www.youtube.com/embed/Ym8pVPJhlmw?controls=1">
+                    </iframe>
                 </div>
             </div>
         );

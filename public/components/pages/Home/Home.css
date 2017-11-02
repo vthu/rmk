@@ -9,3 +9,10 @@
     justify-content: center;
     height: 100vh;
 }
+
+.videoContainer {
+    margin-top: 20;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
