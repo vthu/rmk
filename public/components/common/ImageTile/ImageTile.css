@@ -1,0 +1,17 @@
+.imageTile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.imageTile .headerText {
+  font-weight: 100;
+  font-size: 27.3px;
+}
+
+.imageTile .footerText {
+  text-align: center;
+  font-size: 21.2px;
+}
