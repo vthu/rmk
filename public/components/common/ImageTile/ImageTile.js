@@ -26,7 +26,7 @@ const ImageTile = ({ headerText = '', footerText = '', imageURL, imageSize = 'M'
   }
   width += 50
   return (
-    <div style={{ width }} className="imageTile">
+    <div style={{ maxWidth: width }} className="imageTile">
       <p className="headerText">{headerText}</p>
       <Image src={imageURL} size={imageSize} />
       <p className="footerText">{footerText}</p>

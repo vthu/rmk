@@ -1,17 +1,19 @@
 const gulp = require('gulp');
+const sass = require('gulp-sass');
 const webpack = require('webpack');
 const $ = require('gulp-load-plugins')();
 
 
 // public/components/**/*.css to .build/css/components.bundle.css
 gulp.task('component-css', function () {
-    return gulp.src('./public/components/**/*.css')
+    return gulp.src('./public/components/**/*.scss')
+    .pipe(sass())
     .pipe($.concat('components.bundle.css'))
     .pipe(gulp.dest('./.build/css/'))
 });
 
 
-// public/assets/**  to .build/assets/** 
+// public/assets/**  to .build/assets/**
 gulp.task('copy-assets', function() {
     return gulp.src('./public/assets/**')
     .pipe(gulp.dest('./.build/assets'))
@@ -26,7 +28,7 @@ gulp.task('webpackify-components', function() {
 
 gulp.task('watch', function() {
     gulp.watch('./public/**/*.js', ['webpackify-components']);
-    gulp.watch('./public/**/*.css',['component-css']);
+    gulp.watch('./public/**/*.scss',['component-css']);
     gulp.watch('./public/assets/**', ['copy-assets']);
 });
 

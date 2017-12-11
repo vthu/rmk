@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Image= ({ src, size='M' }) => {
+const Image= ({ src, size='M', alt='Image' }) => {
     let width = null;
     switch(size) {
         case 'XXS':
@@ -24,7 +24,7 @@ const Image= ({ src, size='M' }) => {
     }
     return (
         <div>
-            <img src={src} width={width} />
+            <img src={src} width={width} alt={alt} />
         </div>
     );
 }
