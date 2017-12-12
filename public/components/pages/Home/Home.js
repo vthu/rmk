@@ -108,7 +108,7 @@ class _Home extends React.PureComponent {
                         <p className="storyTitle">Stories</p>
                         <div className="prodIntro">
                             <div className="tile">
-                                <Image size="M" src="assets/img/car.png" alt="Promo Image"/>
+                                <Image size="L" src="assets/img/sewing.png" alt="sewing"/>
                             </div>
                             <div className="tile">
                                 <p className="storyDesc">
@@ -118,7 +118,7 @@ class _Home extends React.PureComponent {
                                 <p>Fabryc enables companies to share their creation process or simply tell a story about their product, creating new experiences and transparency in the marketplace.</p>
                             </div>
                             <div className="tile">
-                                <Image size="M" src="assets/img/shirt-and-tree.png" alt="Promo Image"/>
+                                <Image size="L" src="assets/img/farming.png" alt="Farming"/>
                             </div>
                         </div>
                         <div className="qrcode">
@@ -140,7 +140,7 @@ class _Home extends React.PureComponent {
                         <p className="storyTitle">Verification</p>
                         <div className="prodIntro">
                             <div className="tile">
-                                <Image size="L" src="assets/img/paint-and-shoe.png" alt="Promo Image"/>
+                                <Image size="M" src="assets/img/painter-icon.png" alt="Painters"/>
                             </div>
                             <div className="tile">
                                 <p className="storyDesc">
@@ -150,7 +150,7 @@ class _Home extends React.PureComponent {
                                 <p>We use blockchain technology to create an immutable, decentralzied ledger that allows companies to securely verify their products. </p>
                             </div>
                             <div className="tile">
-                                <Image size="L" src="assets/img/shirt-and-tree.png" alt="Promo Image"/>
+                                <Image size="M" src="assets/img/shoe-icon.png" alt="Promo Image"/>
                             </div>
                         </div>
                         <div className="qrcode">
@@ -191,7 +191,9 @@ class _Home extends React.PureComponent {
                     <div className="container">
                         <div className="footerContent">
                             <div className="column">
-                                <a href="https://twitter.com/" target="_blank">Twitter</a>
+                                <a href="https://twitter.com/" target="_blank">
+                                    <Image size="XXS" src="assets/img/twitter-icon.png" alt="Twitter"/>
+                                </a>
                             </div>
                             <div className="column">
                                 <span className="whiteText">Whitepaper</span>
@@ -202,15 +204,6 @@ class _Home extends React.PureComponent {
                         </div>
                     </div>
                 </section>
-
-                <div className="videoContainer">
-                    <div className="container">
-                        <h3>Don't know how to use? Watch this</h3>
-                        <iframe width="480" height="315"
-                            src="https://www.youtube.com/embed/Ym8pVPJhlmw?controls=1">
-                        </iframe>
-                    </div>
-                </div>
             </div>
         );
     }
