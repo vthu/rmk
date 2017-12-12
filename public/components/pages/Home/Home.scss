@@ -1,0 +1,191 @@
+.home {
+    .logo {
+        padding-top: 33px;
+        text-align: center;
+    }
+
+    .prodIntro {
+        display: flex;
+        align-items: stretch;
+        .tile {
+            width: 33.33%;
+            text-align: center;
+        }
+
+        img {
+            height: 250px;
+        }
+    }
+
+    .first {
+        background-color: #AECF43;
+    }
+
+    .fqContainer {
+        display: flex;
+        align-items: stretch;
+        padding: 25px 0;
+
+        .qrcode,
+        .form {
+            width: 33.33%;
+            align-self: flex-end;
+        }
+
+        .qrcode {
+            img {
+                width: 100px;
+            }
+        }
+
+        .inputContainer {
+            img {
+                width: 30px;
+            }
+
+            input {
+                margin: 20px 20px 20px 40px;
+            }
+        }
+
+        .buttons {
+            text-align: right;
+        }
+
+        .signup button{
+            background-color: #b3cdbf;
+        }
+
+        .button,
+        .textSpan {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .login {
+            display: inline;
+
+            .button {
+                background-color: transparent;
+                color: #1b75bc;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .second, .third {
+        background: linear-gradient(to bottom, rgba(110,205,229,1) 0%, rgba(110,205,229,1) 50%, rgba(245,135,108,1) 51%, rgba(245,135,108,1) 100%);
+        padding-bottom: 30px;
+
+        .container{
+            position: relative;
+        }
+
+        p {
+            color: #fff;
+        }
+
+        .prodIntro {
+            margin-top: 50px;
+        }
+        .storyTitle {
+            text-align: center;
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        .storyDesc {
+            text-align: center;
+            line-height: 2.5;
+            margin-top: 50px;
+        }
+
+        .qrcode {
+            text-align: center;
+            margin-top: 45px;
+
+            img {
+                width: 100px;
+            }
+
+            p {
+                font-weight: 100;
+            }
+        }
+    }
+
+    .third {
+        background: #d8a0ca;
+    }
+
+    .fourth {
+        padding-bottom: 30px;
+        background: #d2d4d5;
+        text-align: center;
+
+        .container{
+            position: relative;
+        }
+
+        p {
+            color: #000;
+        }
+
+        .storyDesc, .storyDesc {
+            font-size: 20px;
+        }
+
+        .longDesc {
+            width: 450px;
+            margin: 0 auto;
+        }
+
+        .qrcode {
+            margin-top: 30px;
+        }
+    }
+
+    .videoContainer {
+        text-align: center;
+        padding: 40px 0;
+    }
+
+    .etherPowered {
+        position: absolute;
+        bottom: -40px;
+        right: 0;
+        width: 225px;
+        display: flex;
+
+        p {
+            margin-top: 5px;
+        }
+    }
+
+    .footer {
+        background-color: #d2d4d5;
+    }
+
+    .footerContent {
+        overflow: hidden;
+        padding: 15px;
+        border-top: 2px solid #fff;
+        .column {
+            float: left;
+            width: 33.3333%;
+            text-align: center;
+
+            &:first-child{
+                text-align: left;
+            }
+
+            &:last-child{
+                text-align: right;
+            }
+        }
+
+        .whiteText {
+            color: #fff;
+        }
+    }
+}
